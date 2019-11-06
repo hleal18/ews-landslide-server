@@ -4,7 +4,8 @@
   "description": "backend for ews-landslide project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/hleal18/ews-landslide-backend/issues"
   },
-  "homepage": "https://github.com/hleal18/ews-landslide-backend#readme"
+  "homepage": "https://github.com/hleal18/ews-landslide-backend#readme",
+  "dependencies": {
+    "typescript": "^3.7.2"
+  }
 }
