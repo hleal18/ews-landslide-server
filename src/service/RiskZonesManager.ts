@@ -20,15 +20,14 @@ export default class RiskZonesManager {
     //     return result;
     // }
 
-    static async addRiskZone(zone: IRiskZone) : Promise<IRiskZone> {
-        const riskZone : IRiskZone = await RiskZonesRecordManager.addRiskZone(zone);
-        console.log('Element saved id: ', riskZone);
+    static async addRiskZone(zone: IRiskZone): Promise<IRiskZone> {
+        const riskZone: IRiskZone = await RiskZonesRecordManager.addRiskZone(zone);
         return riskZone;
     }
 
-    static async  getRiskZone(id_zone: string) : Promise<IRiskZone | null> {
+    static async  getRiskZone(id_zone: string): Promise<IRiskZone | null> {
         // Search for risk zones in db
-        const riskZone : IRiskZone | null = await RiskZonesRecordManager.getRiskZone(id_zone);
+        const riskZone: IRiskZone | null = await RiskZonesRecordManager.getRiskZone(id_zone);
         return riskZone;
     }
 }
