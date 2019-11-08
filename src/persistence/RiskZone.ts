@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import IRiskZone from "../model/IRiskZone";
+import RiskZone from "../model/RiskZone";
 
 const RiskZoneSchema = new mongoose.Schema({
     name: {
@@ -18,6 +18,8 @@ const RiskZoneSchema = new mongoose.Schema({
     collaboratorsId: [String]
 });
 
-export interface RiskZoneDocument extends IRiskZone, mongoose.Document {}
+// Should extend from RiskZone, because it implements the functions
+// described by IRiskZone interface.
+export interface RiskZoneDocument extends RiskZone, mongoose.Document { }
 
 export const RiskZones = mongoose.model<RiskZoneDocument>('RiskZones', RiskZoneSchema);

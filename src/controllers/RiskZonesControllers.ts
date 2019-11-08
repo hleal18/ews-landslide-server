@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import RiskZonesManager from "../service/RiskZonesManager";
-import mongoose from "mongoose";
-import { CLIENT_RENEG_LIMIT } from "tls";
 
 export default class RiskZonesControllers {
     static async addRiskZone(req: Request, res: Response): Promise<void> {
@@ -60,6 +58,17 @@ export default class RiskZonesControllers {
             console.log('An error occured: ', e.message);
             res.status(404).send({ message: 'Document was not edited, an unexpected error occurred' });
         }
+    }
+
+    static async addCollaboratorId(req: Request, res: Response): Promise<void> {
+        const zoneId = req.params['id'];
+        const collaboratorId = req.body['collaboratorId'];
+
+        const newZone = await RiskZonesManager.addCollaboratorId(zoneId, collaboratorId);
+        if (newZone) res.status(200).send({ riskZone: { newZone } });
+        else res.status(404).send({ message: `Element could not be modified, check id's` });
+
+
     }
 
 }
