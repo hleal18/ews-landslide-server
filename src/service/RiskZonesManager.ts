@@ -25,9 +25,16 @@ export default class RiskZonesManager {
         return riskZone;
     }
 
-    static async  getRiskZone(id_zone: string): Promise<IRiskZone | null> {
+    static async  getRiskZone(id_zone: String): Promise<IRiskZone | null> {
         // Search for risk zones in db
+        console.log('Get riskzones manager invoked');
         const riskZone: IRiskZone | null = await RiskZonesRecordManager.getRiskZone(id_zone);
+        console.log('RiskZone object: ', riskZone);
         return riskZone;
+    }
+
+    static async editRiskZone(id_zone: String, zone: IRiskZone): Promise<IRiskZone | null> {
+        const riskZone: IRiskZone | null = await RiskZonesRecordManager.editRiskZone(id_zone, zone);
+        return riskZone
     }
 }
