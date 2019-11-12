@@ -1,6 +1,5 @@
 import RiskZonesRecordManager from "../persistence/RiskZonesRecordManager";
 import IRiskZone from "../model/IRiskZone";
-import RiskZone from "../model/RiskZone";
 
 export default class RiskZonesManager {
     // static async addRiskZone(admin: string, name: string, description: string, criticalSpotsId?: Array<string>, collaboratorsId? : Array<string>) : Promise<IRiskZone> {
@@ -41,10 +40,36 @@ export default class RiskZonesManager {
 
     static async addCollaboratorId(id_zone: string, collaboratorId: string): Promise<IRiskZone | null> {
         const riskZone: IRiskZone | null = await RiskZonesRecordManager.getRiskZone(id_zone);
-        if (riskZone && (riskZone as RiskZone).addCollaborator(collaboratorId)) {
+        if (!riskZone) throw new Error(`Provided ${id_zone} risk zone does not exist.`);
+        if (!riskZone.addCollaborator(collaboratorId)) throw new Error(`Collaborator's Id already exists`);
+        const newRiskZone: IRiskZone | null = await RiskZonesRecordManager.editRiskZone(id_zone, riskZone);
+        return newRiskZone;
+    }
+
+    static async deleteCollaboratorId(id_zone: string, collaboratorId: string): Promise<IRiskZone | null> {
+        const riskZone: IRiskZone | null = await RiskZonesRecordManager.getRiskZone(id_zone);
+        if (riskZone && riskZone.deleteCollaborator(collaboratorId)) {
             const newRiskZone: IRiskZone | null = await RiskZonesRecordManager.editRiskZone(id_zone, riskZone);
             return newRiskZone;
         }
-        else return null;
+        else throw new Error(`Collaborator's id not found`);
+    }
+
+    static async addCriticalSpotId(id_zone: string, criticalSpotId: string): Promise<IRiskZone | null> {
+        const riskZone: IRiskZone | null = await RiskZonesRecordManager.getRiskZone(id_zone);
+        if (riskZone && riskZone.addCriticalSpot(criticalSpotId)) {
+            const newRiskZone: IRiskZone | null = await RiskZonesRecordManager.editRiskZone(id_zone, riskZone);
+            return newRiskZone;
+        }
+        else throw new Error(`Critical Spot Id is already added`);
+    }
+
+    static async deleteCriticalSpotId(id_zone: string, criticalSpotId: string): Promise<IRiskZone | null> {
+        const riskZone: IRiskZone | null = await RiskZonesRecordManager.getRiskZone(id_zone);
+        if (riskZone && riskZone.deleteCriticalSpot(criticalSpotId)) {
+            const newRiskZone: IRiskZone | null = await RiskZonesRecordManager.editRiskZone(id_zone, riskZone);
+            return newRiskZone;
+        }
+        else throw new Error(`Critical Spot Id not found`);
     }
 }
