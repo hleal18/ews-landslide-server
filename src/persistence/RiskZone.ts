@@ -18,6 +18,11 @@ const RiskZoneSchema = new mongoose.Schema({
     collaboratorsId: [String]
 });
 
+RiskZoneSchema.method('addCollaborator', RiskZone.prototype.addCollaborator);
+RiskZoneSchema.method('addCriticalSpot', RiskZone.prototype.addCriticalSpot);
+RiskZoneSchema.method('deleteCollaborator', RiskZone.prototype.deleteCollaborator);
+RiskZoneSchema.method('deleteCriticalSpot', RiskZone.prototype.deleteCriticalSpot);
+
 // Should extend from RiskZone, because it implements the functions
 // described by IRiskZone interface.
 export interface RiskZoneDocument extends RiskZone, mongoose.Document { }
