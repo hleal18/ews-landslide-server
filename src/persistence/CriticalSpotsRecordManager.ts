@@ -13,7 +13,7 @@ export default class CriticalSpotsRecordManager {
     }
 
     static async editCriticalSpot(criticalSpotId: string, criticalSpot: ICriticalSpot): Promise<ICriticalSpot | null> {
-        const newCriticalSpot: ICriticalSpot | null = await CriticalSpots.findOneAndUpdate(criticalSpotId, criticalSpot, { new: true });
+        const newCriticalSpot: ICriticalSpot | null = await CriticalSpots.findByIdAndUpdate(criticalSpotId, criticalSpot, { new: true });
         return newCriticalSpot;
     }
 }

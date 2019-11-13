@@ -29,7 +29,7 @@ export default class CriticalSpotsController {
             const criticalSpotId = req.params['id'];
             const criticalSpot: ICriticalSpot = req.body;
             const updatedCriticalSpot: ICriticalSpot | null = await CriticalSpotsManager.editCriticalSpot(criticalSpotId, criticalSpot);
-            if (updatedCriticalSpot) res.status(200).send({ criticalSpot: { ...updatedCriticalSpot } });
+            if (updatedCriticalSpot) res.status(200).send({ criticalSpot: updatedCriticalSpot });
             else res.status(404).send({ message: `Error occured: CriticalSpotsObject not found` });
         } catch (e) {
             console.log(`Error: ${e.message}`);
