@@ -1,5 +1,5 @@
 import Express from "express";
-import RiskZonesControllers from "../controllers/RiskZonesControllers";
+import RiskZonesControllers from "../controllers/riskzones.controller";
 
 const router = Express.Router();
 

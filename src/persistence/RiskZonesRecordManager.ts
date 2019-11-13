@@ -1,4 +1,4 @@
-import { RiskZones } from "./RiskZone";
+import RiskZones from "./RiskZone";
 import IRiskZone from "../model/IRiskZone";
 
 class RiskZonesRecordManager {
@@ -7,13 +7,13 @@ class RiskZonesRecordManager {
         return result;
     }
 
-    static async getRiskZone(id_zone: String): Promise<IRiskZone | null> {
-        const result: IRiskZone | null = await RiskZones.findById(id_zone);
+    static async getRiskZone(zoneId: String): Promise<IRiskZone | null> {
+        const result: IRiskZone | null = await RiskZones.findById(zoneId);
         return result;
     }
 
-    static async editRiskZone(id_zone: String, zone: IRiskZone): Promise<IRiskZone | null> {
-        const result: IRiskZone | null = await RiskZones.findByIdAndUpdate(id_zone, zone, { new: true });
+    static async editRiskZone(zoneId: String, zone: IRiskZone): Promise<IRiskZone | null> {
+        const result: IRiskZone | null = await RiskZones.findByIdAndUpdate(zoneId, zone, { new: true });
         if (result) {
             console.log('Entry updated, new zone: ', result);
         }

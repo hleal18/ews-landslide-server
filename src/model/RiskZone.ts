@@ -1,18 +1,25 @@
 import IRiskZone from "./IRiskZone";
 //import RiskZoneModel from "../dbschemas/RiskZone";
 
-export default class RiskZone implements IRiskZone{
+export default class RiskZone implements IRiskZone {
     // private _name: string;
     // private _description: string;
     // private _adminId: string;
     // private _criticalSpotsId: Array<string>;
     // private _collaboratorsId: Array<string>;
 
-    name: string;
-    description: string;
-    adminId: string;
-    criticalSpotsId: Array<string>;
-    collaboratorsId: Array<string>;
+    // name: string;
+    // description: string;
+    // adminId: string;
+    // criticalSpotsId: Array<string>;
+    // collaboratorsId: Array<string>;
+
+    private name: string;
+    private description: string;
+    private adminId: string;
+    private criticalSpotsId: Array<string>;
+    private collaboratorsId: Array<string>;
+
     constructor(name: string, description: string, adminId: string, criticalSpotsId: Array<string> = [], collaboratorsId: Array<string> = []) {
         this.name = name;
         this.description = description;
@@ -69,7 +76,7 @@ export default class RiskZone implements IRiskZone{
     //         console.log(`error saving riskzone: ${e.message}`);
     //         return false;
     //     }
-        
-        
+
+
     // }
 }
