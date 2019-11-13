@@ -2,9 +2,9 @@ require('./config/mongoose');
 import RiskZone from "./model/RiskZone";
 import IRiskZone from "./model/IRiskZone";
 import RiskZonesManager from "./service/RiskZonesManager";
-import { RiskZoneDocument, RiskZones } from "./persistence/RiskZone";
+import RiskZones from "./persistence/RiskZone";
 
-let zone_id : string = "1";
+let zone_id: string = "1";
 
 async function saveRiskZone() {
     let zone: IRiskZone = new RiskZone("popa", "salto del cabron", "123456");
@@ -29,7 +29,7 @@ async function saveRiskZone() {
 
     if (result) {
         console.log("Guardado en db: ", result);
-        zone_id = (result as RiskZoneDocument)._id;
+        //zone_id = (result as RiskZoneDocument)._id;
         console.log('Value of id: ', zone_id);
     }
     else console.log("No guardado en db");
