@@ -11,7 +11,7 @@ const RiskZoneSchema = new mongoose.Schema({
         required: true
     },
     adminId: {
-        type: String,
+        type: mongoose.Types.ObjectId,
         required: true,
         immutable: true
     }
