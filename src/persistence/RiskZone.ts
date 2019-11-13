@@ -12,7 +12,8 @@ const RiskZoneSchema = new mongoose.Schema({
     },
     adminId: {
         type: String,
-        required: true
+        required: true,
+        immutable: true
     }
 });
 

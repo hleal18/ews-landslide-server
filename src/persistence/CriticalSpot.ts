@@ -12,7 +12,8 @@ const CriticalSpotSchema = new mongoose.Schema({
     },
     riskZoneId: {
         type: String,
-        required: true
+        required: true,
+        immutable: true
     },
     latitude: {
         type: Number,
