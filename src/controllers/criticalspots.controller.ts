@@ -5,19 +5,18 @@ import RiskZonesManager from '../service/RiskZonesManager';
 
 import ICriticalSpot from '../model/ICriticalSpot';
 import IRiskZone from '../model/IRiskZone';
-import { CriticalSpotDocument } from '../persistence/CriticalSpot';
 
 export default class CriticalSpotsController {
     static async addCriticalSpot(req: Request, res: Response): Promise<void> {
         try {
             const criticalSpot: ICriticalSpot = req.body;
             const riskZoneId: string = req.body['riskZoneId'];
-
             const riskZone: IRiskZone | null = await RiskZonesManager.getRiskZone(riskZoneId);
-            if (!riskZone) throw new Error(`Risk Zone Id invalid: ${riskZoneId}}`);
+
+            if (riskZone === null) throw new Error(`Risk Zone Id invalid: ${riskZoneId}}`);
 
             const newCriticalSpot = await CriticalSpotsManager.addCriticalSpot(criticalSpot);
-            const updatedRiskZone: IRiskZone | null = await RiskZonesManager.addCriticalSpotId(riskZoneId, (newCriticalSpot as CriticalSpotDocument)._id);
+
             res.status(200).send({ criticalSpot: newCriticalSpot });
         } catch (e) {
             console.log(`Error: ${e.message}`);
