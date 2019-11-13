@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import CriticalSpot from '../model/CriticalSpot';
+import ICriticalSpot from '../model/ICriticalSpot';
 
 const CriticalSpotSchema = new mongoose.Schema({
     name: {
@@ -15,21 +15,15 @@ const CriticalSpotSchema = new mongoose.Schema({
         required: true
     },
     latitude: {
-        type: String,
+        type: Number,
         required: true
     },
     longitude: {
-        type: String,
+        type: Number,
         required: true
-    },
-    sensorNodes: {
-        type: [String]
     }
 });
 
-CriticalSpotSchema.method('addSensorNode', CriticalSpot.prototype.addSensorNode);
-CriticalSpotSchema.method('deleteSensorNode', CriticalSpot.prototype.deleteSensorNode);
-
-export interface CriticalSpotDocument extends CriticalSpot, mongoose.Document { }
+export interface CriticalSpotDocument extends ICriticalSpot, mongoose.Document { }
 
 export default mongoose.model<CriticalSpotDocument>('CriticalSpots', CriticalSpotSchema);

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import RiskZone from "../model/RiskZone";
+import IRiskZone from "../model/IRiskZone";
 
 const RiskZoneSchema = new mongoose.Schema({
     name: {
@@ -13,18 +13,11 @@ const RiskZoneSchema = new mongoose.Schema({
     adminId: {
         type: String,
         required: true
-    },
-    criticalSpotsId: [String],
-    collaboratorsId: [String]
+    }
 });
-
-RiskZoneSchema.method('addCollaborator', RiskZone.prototype.addCollaborator);
-RiskZoneSchema.method('addCriticalSpot', RiskZone.prototype.addCriticalSpot);
-RiskZoneSchema.method('deleteCollaborator', RiskZone.prototype.deleteCollaborator);
-RiskZoneSchema.method('deleteCriticalSpot', RiskZone.prototype.deleteCriticalSpot);
 
 // Should extend from RiskZone, because it implements the functions
 // described by IRiskZone interface.
-interface RiskZoneDocument extends RiskZone, mongoose.Document { }
+interface RiskZoneDocument extends IRiskZone, mongoose.Document { }
 
 export default mongoose.model<RiskZoneDocument>('RiskZones', RiskZoneSchema);

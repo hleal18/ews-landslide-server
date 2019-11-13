@@ -39,6 +39,9 @@ export default class RiskZonesControllers {
         }
     }
 
+    // Add error handling for every possible outcome.
+    // Id not provided, collaboratorId not provided, invalid riskzone id, invalid collaboratorId
+    // collaboratorId already exists
     static async editRiskZone(req: Request, res: Response): Promise<void> {
         try {
             const zoneId = req.params['id'];
@@ -53,73 +56,10 @@ export default class RiskZonesControllers {
             // Proveer un Id inválido.
             // Proveer un Id valido y en el cuerpo tratar de modificar Id (es inmutable)
             // Proveer un id valid pero un atributo id invalido
-            // Modifica directamente las listas internas.
         } catch (e) {
             console.log('An error occured: ', e);
             console.log('An error occured: ', e.message);
             res.status(404).send({ message: 'Document was not edited, an unexpected error occurred' });
-        }
-    }
-
-    // Add error handling for every possible outcome.
-    // Id not provided, collaboratorId not provided, invalid riskzone id, invalid collaboratorId
-    // collaboratorId already exists
-    static async addCollaboratorId(req: Request, res: Response): Promise<void> {
-        try {
-            const zoneId: string = req.params['id'];
-            let collaboratorId: String = req.body['collaboratorId'];
-            if (collaboratorId === null) console.log('Collaborator Id non existent.');
-            else if (collaboratorId === undefined) console.log('"Collaborator Id Undefined"');
-            // if (!zoneId || !collaboratorId) {
-            //     res.status(404).send({ message: `RiskZone Id or Collaborator Id missing` });
-            //     return;
-            // }
-            const riskZone = await RiskZonesManager.addCollaboratorId(zoneId, collaboratorId as string);
-            if (riskZone) res.status(200).send({ riskZone });
-            else res.status(404).send({ message: `Element could not be modified, check id's` });
-        } catch (e) {
-            console.log('Error: ', e.message);
-            res.status(404).send({ message: `Error: ${e.message}` });
-        }
-
-    }
-
-    static async addCriticalSpotId(req: Request, res: Response): Promise<void> {
-        try {
-            const zoneId: string = req.params['id'];
-            const criticalSpotId: string = req.body['criticalSpotId'];
-            const riskZone: IRiskZone | null = await RiskZonesManager.addCriticalSpotId(zoneId, criticalSpotId);
-            if (riskZone) res.status(200).send({ riskZone });
-            else res.status(404).send({ message: `Element could not be modified, check id's` });
-        } catch (e) {
-            console.log('Error: ', e.message);
-            res.status(404).send({ message: `Error: ${e.message}` });
-        }
-    }
-
-    static async deleteCollaboratorId(req: Request, res: Response): Promise<void> {
-        try {
-            const zoneId: string = req.params['id'];
-            const collaboratorId: string = req.body['collaboratorId'];
-            const riskZone: IRiskZone | null = await RiskZonesManager.deleteCollaboratorId(zoneId, collaboratorId);
-            if (riskZone) res.status(200).send({ riskZone });
-            else res.status(404).send({ message: `Element could not be modified, check id's` });
-        } catch (e) {
-            console.log('Error: ', e.message);
-            res.status(404).send({ message: `Error: ${e.message}` });
-        }
-    }
-
-    static async deleteCriticalSpot(req: Request, res: Response): Promise<void> {
-        try {
-            const zoneId: string = req.params['id'];
-            const criticalSpotId: string = req.body['criticalSpotId'];
-            const riskZone: IRiskZone | null = await RiskZonesManager.deleteCriticalSpotId(zoneId, criticalSpotId);
-            if (riskZone) res.status(200).send({ riskZone });
-            else res.status(404).send({ message: `Element could not be modified, check id's` });
-        } catch (e) {
-            console.log('Error: ', e.message);
-            res.status(404).send({ message: `Error: ${e.message}` });
         }
     }
 }
