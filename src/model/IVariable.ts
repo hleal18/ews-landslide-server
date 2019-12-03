@@ -1,5 +1,16 @@
+import DefaultVariables from "./DefaultVariables";
+
 export default interface IVariable<T> {
+    id: string;
     name: string;
-    nodeId: string;
+    deviceId: string;
     value: T;
+    timestamp: Date;
+    type: DefaultVariables
 }
+
+export interface IAccelerationVariable extends IVariable<number> {
+
+}
+
+export interface IRainfallVariable extends IVariable<number> { }
