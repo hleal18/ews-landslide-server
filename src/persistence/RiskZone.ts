@@ -11,7 +11,7 @@ const RiskZoneSchema = new mongoose.Schema({
         required: true
     },
     adminId: {
-        type: mongoose.Types.ObjectId,
+        type: String,
         required: true,
         immutable: true
     }
@@ -19,6 +19,6 @@ const RiskZoneSchema = new mongoose.Schema({
 
 // Should extend from RiskZone, because it implements the functions
 // described by IRiskZone interface.
-interface RiskZoneDocument extends IRiskZone, mongoose.Document { }
+export interface RiskZoneDocument extends IRiskZone, mongoose.Document { }
 
 export default mongoose.model<RiskZoneDocument>('RiskZones', RiskZoneSchema);
