@@ -6,6 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "concurrently \"tsc --watch\" \"nodemon ./dist/server.js\"",
+        "play": "concurrently \"tsc --watch\" \"nodemon ./dist/playground/test.js\"",
         "tsc": "tsc --watch",
         "start": "tsc && nodemon ./dist/server.js"
     },
