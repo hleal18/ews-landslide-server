@@ -20,6 +20,8 @@ export default class DevicesRecordManager {
             deviceRecord.variables.push(newVariable);
         }
 
+        await Devices.findByIdAndUpdate(id, deviceRecord);
+
         return deviceRecord;
     }
 }
