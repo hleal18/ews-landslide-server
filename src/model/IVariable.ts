@@ -1,7 +1,6 @@
 import DefaultVariables from "./DefaultVariables";
 
 export default interface IVariable<T> {
-    id: string;
     name: string;
     deviceId: string;
     value: T;

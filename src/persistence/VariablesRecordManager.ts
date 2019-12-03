@@ -11,11 +11,15 @@ export default class VariablesRecordManager {
     }
 
     static async getVariables<T>(deviceId: String, type?: DefaultVariables): Promise<Array<IVariable<T>>> {
-        const variablesList: Array<IVariable<T>> = await Variables.find({ deviceId, type });
+        let variablesList: Array<IVariable<T>>;
 
-        const cuchi: IVariable<T> | null = await Variables.findOne({ deviceId });
+        if (type)
+            variablesList = await Variables.find({ deviceId, type });
+        else
+            variablesList = await Variables.find({ deviceId });
 
-        console.log('Vaqr: ', cuchi);
+        console.log('Vaqr: ', variablesList);
+
         return variablesList;
     }
 

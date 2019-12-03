@@ -1,5 +1,4 @@
 export default interface ICriticalSpot {
-    id: string;
     name: string;
     description: string;
     riskZoneId: string;
