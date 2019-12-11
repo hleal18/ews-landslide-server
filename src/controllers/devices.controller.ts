@@ -4,6 +4,7 @@ import DevicesManager from '../service/DevicesManager';
 
 import IDevice from '../model/IDevice';
 import DefaultVariables from "../model/DefaultVariables";
+import IDeviceVariable from '../model/IDeviceVariable';
 
 export default class DevicesController {
     static async addDevice(req: Request, res: Response): Promise<void> {
@@ -22,10 +23,7 @@ export default class DevicesController {
     static async addVariable(req: Request, res: Response): Promise<void> {
         try {
             const deviceId = req.params['id'];
-            const variable: DefaultVariables = (req.body['variable'] as DefaultVariables);
-
-            console.log('Received variable: ', variable);
-            console.log('Parameter: ', req.body['variable']);
+            const variable: IDeviceVariable = { idSensor: Number(req.body['idSensor']), type: req.body['type'] }
 
             const updatedDevice: IDevice | null = await DevicesManager.addVariable(deviceId, variable);
             if (updatedDevice) res.status(200).send({ device: updatedDevice });

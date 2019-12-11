@@ -1,6 +1,7 @@
 import Devices, { DeviceDocument } from "./Device";
 import IDevice from "../model/IDevice";
 import DefaultVariables from "../model/DefaultVariables";
+import IDeviceVariable from "../model/IDeviceVariable";
 
 export default class DevicesRecordManager {
     static async addDevice(device: IDevice): Promise<IDevice> {
@@ -13,12 +14,15 @@ export default class DevicesRecordManager {
         return result;
     }
 
-    static async addVariable(id: String, newVariable: DefaultVariables): Promise<IDevice | null> {
+    static async addVariable(id: String, newVariable: IDeviceVariable): Promise<IDevice | null> {
         const deviceRecord: IDevice | null = await Devices.findById(id);
 
-        if (deviceRecord && !deviceRecord.variables.includes(newVariable)) {
+        if (!deviceRecord) throw new Error(`Device with id: ${id} not found`);
+
+        if (deviceRecord.variables.find((value) => value.idSensor === newVariable.idSensor) === undefined) {
             deviceRecord.variables.push(newVariable);
         }
+        else throw new Error(`idSensor of ${newVariable.idSensor} already in device`);
 
         await Devices.findByIdAndUpdate(id, deviceRecord);
 

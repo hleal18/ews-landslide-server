@@ -1,6 +1,6 @@
 import IDevice from "../model/IDevice";
-import DefaultVariables from "../model/DefaultVariables";
 import DevicesRecordManager from "../persistence/DevicesRecordManager";
+import IDeviceVariable from "../model/IDeviceVariable";
 
 export default class DevicesManager {
     static async addDevice(device: IDevice): Promise<IDevice> {
@@ -13,7 +13,10 @@ export default class DevicesManager {
         return result;
     }
 
-    static async addVariable(deviceId: String, newVariable: DefaultVariables): Promise<IDevice | null> {
+    static async addVariable(deviceId: String, newVariable: IDeviceVariable): Promise<IDevice | null> {
+        if (newVariable.idSensor === undefined || newVariable.type === undefined)
+            throw new Error(`Fields idSensor or Type not provided`);
+
         const device = await DevicesRecordManager.addVariable(deviceId, newVariable);
         return device;
     }
