@@ -1,5 +1,5 @@
 import RiskZonesRecordManager from "../persistence/RiskZonesRecordManager";
-import IRiskZone from "../model/IRiskZone";
+import IRiskZone from "../domain/IRiskZone";
 
 export default class RiskZonesManager {
 

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import ICriticalSpot from '../model/ICriticalSpot';
+import ICriticalSpot from '../domain/ICriticalSpot';
 
 const CriticalSpotSchema = new mongoose.Schema({
     name: {

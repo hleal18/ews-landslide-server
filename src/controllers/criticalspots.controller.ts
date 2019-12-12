@@ -3,8 +3,8 @@ import { Request, Response } from 'express';
 import CriticalSpotsManager from '../service/CriticalSpotsManager';
 import RiskZonesManager from '../service/RiskZonesManager';
 
-import ICriticalSpot from '../model/ICriticalSpot';
-import IRiskZone from '../model/IRiskZone';
+import ICriticalSpot from '../domain/ICriticalSpot';
+import IRiskZone from '../domain/IRiskZone';
 
 export default class CriticalSpotsController {
     static async addCriticalSpot(req: Request, res: Response): Promise<void> {

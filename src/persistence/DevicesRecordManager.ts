@@ -1,7 +1,7 @@
 import Devices, { DeviceDocument } from "./Device";
-import IDevice from "../model/IDevice";
-import DefaultVariables from "../model/DefaultVariables";
-import IDeviceVariable from "../model/IDeviceVariable";
+import IDevice from "../domain/IDevice";
+import DefaultVariables from "../domain/DefaultVariables";
+import IDeviceVariable from "../domain/IDeviceVariable";
 
 export default class DevicesRecordManager {
     static async addDevice(device: IDevice): Promise<IDevice> {

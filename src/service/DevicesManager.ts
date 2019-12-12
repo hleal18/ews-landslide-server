@@ -1,6 +1,6 @@
-import IDevice from "../model/IDevice";
+import IDevice from "../domain/IDevice";
 import DevicesRecordManager from "../persistence/DevicesRecordManager";
-import IDeviceVariable from "../model/IDeviceVariable";
+import IDeviceVariable from "../domain/IDeviceVariable";
 
 export default class DevicesManager {
     static async addDevice(device: IDevice): Promise<IDevice> {

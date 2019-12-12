@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import RiskZonesManager from "../service/RiskZonesManager";
-import IRiskZone from "../model/IRiskZone";
+import IRiskZone from "../domain/IRiskZone";
 
 export default class RiskZonesControllers {
     static async addRiskZone(req: Request, res: Response): Promise<void> {

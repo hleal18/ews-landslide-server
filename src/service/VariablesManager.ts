@@ -1,5 +1,5 @@
-import IVariable from "../model/IVariable";
-import DefaultVariables from "../model/DefaultVariables";
+import IVariable from "../domain/IVariable";
+import DefaultVariables from "../domain/DefaultVariables";
 
 import VariablesRecordManager from "../persistence/VariablesRecordManager";
 

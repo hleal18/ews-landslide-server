@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 
 import DevicesManager from '../service/DevicesManager';
 
-import IDevice from '../model/IDevice';
-import DefaultVariables from "../model/DefaultVariables";
-import IDeviceVariable from '../model/IDeviceVariable';
+import IDevice from '../domain/IDevice';
+import DefaultVariables from "../domain/DefaultVariables";
+import IDeviceVariable from '../domain/IDeviceVariable';
 
 export default class DevicesController {
     static async addDevice(req: Request, res: Response): Promise<void> {

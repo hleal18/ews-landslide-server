@@ -1,5 +1,5 @@
-import IVariable from "../model/IVariable";
-import IDevice from "../model/IDevice";
+import IVariable from "../domain/IVariable";
+import IDevice from "../domain/IDevice";
 import VariablesManager from "../service/VariablesManager";
 import DevicesManager from "../service/DevicesManager";
 

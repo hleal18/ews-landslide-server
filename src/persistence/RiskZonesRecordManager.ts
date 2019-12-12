@@ -1,5 +1,5 @@
 import RiskZones from "./RiskZone";
-import IRiskZone from "../model/IRiskZone";
+import IRiskZone from "../domain/IRiskZone";
 
 export default class RiskZonesRecordManager {
     static async addRiskZone(zone: IRiskZone): Promise<IRiskZone> {

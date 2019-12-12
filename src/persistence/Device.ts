@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import IDevice from "../model/IDevice";
+import IDevice from "../domain/IDevice";
 
 const DeviceSchema = new mongoose.Schema({
     _id: {

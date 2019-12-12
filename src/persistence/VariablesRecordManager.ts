@@ -1,6 +1,6 @@
 import Variables, { AccelerationVariables, RainfallVariables } from "./Variable";
-import IVariable from "../model/IVariable";
-import DefaultVariables from "../model/DefaultVariables";
+import IVariable from "../domain/IVariable";
+import DefaultVariables from "../domain/DefaultVariables";
 
 export default class VariablesRecordManager {
 

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import IRiskZone from "../model/IRiskZone";
+import IRiskZone from "../domain/IRiskZone";
 
 const RiskZoneSchema = new mongoose.Schema({
     name: {

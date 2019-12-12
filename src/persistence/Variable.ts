@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import IVariable, { IAccelerationVariable, IRainfallVariable } from '../model/IVariable';
+import IVariable, { IAccelerationVariable, IRainfallVariable } from '../domain/IVariable';
 
 // Mongoose discriminators are used to add "inheritance"
 // behavior for models, that way different models under a

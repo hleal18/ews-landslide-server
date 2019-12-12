@@ -1,5 +1,5 @@
 import CriticalSpotsRecordManager from '../persistence/CriticalSpotsRecordManager';
-import ICriticalSpot from '../model/ICriticalSpot';
+import ICriticalSpot from '../domain/ICriticalSpot';
 
 export default class CriticalSpotsManager {
     static async addCriticalSpot(criticalSpot: ICriticalSpot): Promise<ICriticalSpot> {
