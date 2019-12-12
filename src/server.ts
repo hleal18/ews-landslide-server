@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import Routes from "./routes";
 require('./config/mongoose');
+require('./async-controllers');
 
 const app: express.Application = express();
 
