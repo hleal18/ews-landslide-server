@@ -1,6 +1,7 @@
 import IVariable from "../domain/IVariable";
 import DefaultVariables from "../domain/DefaultVariables";
 
+import IQuery from "../persistence/IQuery";
 import VariablesRecordManager from "../persistence/VariablesRecordManager";
 
 export default class VariablesManager {
@@ -9,9 +10,16 @@ export default class VariablesManager {
         return result;
     }
 
-    static async getVariables<T>(deviceId: String, type?: DefaultVariables, query?: Object): Promise<Array<IVariable<T>>> {
+    static async getVariables<T>(deviceId: String, type?: DefaultVariables, {
+        limit = 20,
+        offset = 0,
+        start = new Date(0),
+        end = new Date(Date.now())
+    }: IQuery = {}): Promise<Array<IVariable<T>>> {
         console.log('devices');
-        const variables: Array<IVariable<T>> = await VariablesRecordManager.getVariables(deviceId, type);
+        console.log('Received things: ');
+        console.log(limit, offset, start, end);
+        const variables: Array<IVariable<T>> = await VariablesRecordManager.getVariables(deviceId, type, { limit, offset, start, end });
         return variables;
     }
 }
