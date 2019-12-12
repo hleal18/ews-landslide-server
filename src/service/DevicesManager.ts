@@ -13,6 +13,11 @@ export default class DevicesManager {
         return result;
     }
 
+    static async getDevices(): Promise<Array<IDevice> | null> {
+        const result = await DevicesRecordManager.getDevices();
+        return result;
+    }
+
     static async addVariable(deviceId: String, newVariable: IDeviceVariable): Promise<IDevice | null> {
         if (newVariable.idSensor === undefined || newVariable.type === undefined)
             throw new Error(`Fields idSensor or Type not provided`);
@@ -20,4 +25,6 @@ export default class DevicesManager {
         const device = await DevicesRecordManager.addVariable(deviceId, newVariable);
         return device;
     }
+
+
 }

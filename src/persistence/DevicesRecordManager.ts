@@ -14,6 +14,11 @@ export default class DevicesRecordManager {
         return result;
     }
 
+    static async getDevices(): Promise<Array<IDevice> | null> {
+        const result: Array<IDevice> | null = await Devices.find();
+        return result;
+    }
+
     static async addVariable(id: String, newVariable: IDeviceVariable): Promise<IDevice | null> {
         const deviceRecord: IDevice | null = await Devices.findById(id);
 

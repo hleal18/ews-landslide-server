@@ -5,6 +5,7 @@ import DevicesManager from '../service/DevicesManager';
 import IDevice from '../domain/IDevice';
 import DefaultVariables from "../domain/DefaultVariables";
 import IDeviceVariable from '../domain/IDeviceVariable';
+import Device from '../persistence/Device';
 
 export default class DevicesController {
     static async addDevice(req: Request, res: Response): Promise<void> {
@@ -43,6 +44,21 @@ export default class DevicesController {
         } catch (e) {
             console.log(`Error: ${e.message}`);
             res.status(404).send({ message: `There was an error ${e.message}` });
+        }
+    }
+
+    static async getDevices(req: Request, res: Response): Promise<void> {
+        // Extract authentication header from request and find associated user.
+        // But not right now.
+
+        try {
+            const devices = await DevicesManager.getDevices();
+            console.log('Devices: ', devices);
+
+            if (devices) res.status(200).send({ devices: { length: devices.length, devices } });
+            else res.status(404).send({ message: 'No devices associated to given user.' });
+        } catch (e) {
+            res.status(404).send({ message: `There was an error: ${e.message}` });
         }
     }
 }
