@@ -18,7 +18,6 @@ mqttClient.subscribe(topics, (err, granted) => {
 
 mqttClient.on('message', (topic, payload) => {
     console.log('Message received for topic: ', topic);
-    console.log('Payload: ', payload);
 });
 
 

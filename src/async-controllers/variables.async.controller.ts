@@ -11,12 +11,8 @@ class VariablesAsyncController {
                 return;
             }
 
-
-            console.log('Variable message received: ', payload.byteLength);
             const payloadJson = String(payload);
             const variable: IVariable<T> = (JSON.parse(payloadJson) as IVariable<T>);
-
-            console.log('Variable: ', variable);
 
             variable.timestamp = new Date(Date.now());
 
@@ -27,12 +23,8 @@ class VariablesAsyncController {
                 throw new Error(`Device with name ${variable.deviceId} not found`);
             else if (device.variables.find((value) =>
                 value.idSensor === variable.idSensor && value.type === variable.type) === undefined)
-                throw new Error(`Device with name ${device.name} does not contain variables with 
-                                    idsensor: ${variable.idSensor} 
-                                    and type: ${variable.type}`);
+                throw new Error(`Device with name ${device.name} does not contain variables with idsensor: ${variable.idSensor} and type: ${variable.type}`);
 
-
-            console.log('Saving variable: ', variable);
             await VariablesManager.addVariable(variable);
         } catch (e) {
             console.log('There was an error: ', e.message);
