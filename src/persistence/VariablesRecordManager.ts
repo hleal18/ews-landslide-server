@@ -19,7 +19,7 @@ export default class VariablesRecordManager {
         if (type && query)
             variablesList = await Variables.find({ deviceId, type, timestamp: { $gte: query.start, $lte: query.end } }).skip(query.offset as number).limit(query.limit as number).sort({ timestamp: 'desc' });
         else if (query)
-            variablesList = await Variables.find({ deviceId, timestamp: { $gte: query.start, $lte: query.end } }).limit(query.limit as number).sort({ timestamp: 'desc' });
+            variablesList = await Variables.find({ deviceId, timestamp: { $gte: query.start, $lte: query.end } }).skip(query.offset as number).limit(query.limit as number).sort({ timestamp: 'desc' });
         else
             variablesList = await Variables.find({ deviceId });
 
