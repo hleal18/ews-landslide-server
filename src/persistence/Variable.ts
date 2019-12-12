@@ -1,4 +1,4 @@
-import mongoose, { Schema, SchemaTypes, SchemaType } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import IVariable, { IAccelerationVariable, IRainfallVariable } from '../model/IVariable';
 
 // Mongoose discriminators are used to add "inheritance"
@@ -11,7 +11,7 @@ const VariableSchema = new mongoose.Schema({
         required: true
     },
     deviceId: {
-        type: Schema.Types.ObjectId,
+        type: String,
         required: true,
         immutable: true
     },
@@ -25,6 +25,10 @@ const VariableSchema = new mongoose.Schema({
     },
     type: {
         type: String,
+        required: true
+    },
+    idSensor: {
+        type: Number,
         required: true
     }
 }, {
