@@ -9,6 +9,7 @@ export default class VariablesController {
     static async getVariables<T>(req: Request, res: Response): Promise<void> {
         try {
             const deviceId: String = req.params['id'];
+            const idSensor = (req.query['idSensor']) ? Number(req.query['idSensor']) : undefined;
             const type: DefaultVariables = req.query['type'];
             const limit = (req.query['limit']) ? Number(req.query['limit']) : undefined;
             const offset = (req.query['offset']) ? Number(req.query['offset']) : undefined;
@@ -18,7 +19,7 @@ export default class VariablesController {
             const query: IQuery = { limit, offset, start, end };
 
             console.log('Query received: ', query);
-            const variables: Array<IVariable<T>> = await VariablesManager.getVariables(deviceId, type, query);
+            const variables: Array<IVariable<T>> = await VariablesManager.getVariables(deviceId, idSensor, type, query);
 
             //console.log('Variables: ', variables);
             res.status(200).send({
