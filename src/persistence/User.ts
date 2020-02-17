@@ -18,7 +18,20 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     }
+}, {
+    toObject: {
+        transform: (doc, ret) => {
+            delete ret.password;
+        }
+    },
+    toJSON: {
+        transform: (doc, ret) => {
+            delete ret.password;
+        }
+    }
 });
+
+
 
 export interface IUserDocument extends IUser, mongoose.Document { };
 
