@@ -8,7 +8,7 @@ const CriticalSpotSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+        default: ''
     },
     riskZoneId: {
         type: mongoose.Types.ObjectId,
@@ -18,11 +18,11 @@ const CriticalSpotSchema = new mongoose.Schema({
     },
     latitude: {
         type: Number,
-        required: true
+        default: 0
     },
     longitude: {
         type: Number,
-        required: true
+        default: 0
     }
 });
 
