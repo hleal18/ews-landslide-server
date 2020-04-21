@@ -13,6 +13,11 @@ export default class RiskZonesManager {
         return riskZone;
     }
 
+    static async getRiskZones(adminId: string): Promise<[IRiskZone] | null> {
+        const riskZones: [IRiskZone] | null = await RiskZonesRecordManager.getRiskZones(adminId);
+        return riskZones;
+    }
+
     static async editRiskZone(id_zone: string, zone: IRiskZone): Promise<IRiskZone | null> {
         const riskZone: IRiskZone | null = await RiskZonesRecordManager.editRiskZone(id_zone, zone);
         return riskZone

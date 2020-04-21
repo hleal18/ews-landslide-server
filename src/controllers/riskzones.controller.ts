@@ -5,9 +5,14 @@ import IRiskZone from "../domain/IRiskZone";
 export default class RiskZonesControllers {
     static async addRiskZone(req: Request, res: Response): Promise<void> {
         try {
-            console.log('Received body: ', req.body);
-            const riskZone = await RiskZonesManager.addRiskZone(req.body);
-            res.status(200).send({ riskZone });
+            const riskZone: IRiskZone = {
+                name: req.body.name,
+                description: req.body.description,
+                adminId: req.authInfo.id
+            }
+
+            const newRiskZone = await RiskZonesManager.addRiskZone(riskZone);
+            res.status(200).send({ riskZone: newRiskZone });
         } catch (e) {
             if (e.name === 'ValidationError') {
                 console.log('There is a missing field in the body of the request: ', req.body);
@@ -29,7 +34,28 @@ export default class RiskZonesControllers {
             else res.status(205).send({ message: `Risk riskZone with ${id} id not found!` });
         } catch (e) {
             if (e.name === 'ValidationError') {
-                console.log('There is a missing filed in the request: ', e.message);
+                console.log('There is a missing field in the request: ', e.message);
+                res.status(404).send({ message: `Id parameter expected` });
+            }
+            else if (e.name == 'CastError' && e.kind == 'ObjectId') {
+                console.log(`Error: ${e.message}`);
+                res.status(404).send({ message: `Invalid Id received.` });
+            }
+        }
+    }
+
+    static async getRiskZones(req: Request, res: Response): Promise<void> {
+        try {
+            const adminId: string = req.authInfo.id;
+
+            const riskZones: [IRiskZone] | null = await RiskZonesManager.getRiskZones(adminId);
+
+            if (riskZones) res.status(200).send({ riskZones });
+            else res.status(205).send({ message: `Riskzones for adminId: ${adminId} not found!` });
+
+        } catch (e) {
+            if (e.name === 'ValidationError') {
+                console.log('There is a missing field in the request: ', e.message);
                 res.status(404).send({ message: `Id parameter expected` });
             }
             else if (e.name == 'CastError' && e.kind == 'ObjectId') {

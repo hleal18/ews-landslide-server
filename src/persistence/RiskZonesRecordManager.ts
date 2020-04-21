@@ -12,6 +12,12 @@ export default class RiskZonesRecordManager {
         return result;
     }
 
+    static async getRiskZones(adminId: String): Promise<Array<IRiskZone> | null> {
+        const result: Array<IRiskZone> | null = await RiskZones.find({ adminId });
+        //console.log('Result: ', result);
+        return result;
+    }
+
     static async editRiskZone(zoneId: String, zone: IRiskZone): Promise<IRiskZone | null> {
         const result: IRiskZone | null = await RiskZones.findByIdAndUpdate(zoneId, zone, { new: true });
         return result;
