@@ -7,8 +7,7 @@ const RiskZoneSchema = new mongoose.Schema({
         required: true
     },
     description: {
-        type: String,
-        required: true
+        type: String
     },
     adminId: {
         type: String,
