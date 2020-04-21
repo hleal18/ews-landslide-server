@@ -9,15 +9,13 @@ export default class UsersManager {
         const duplicate: IUser | null =
             await UserRecordManager.getUserByEmail(user.email);
 
-        let result: IUser | null = null;
+        if (duplicate) throw new Error(`User provided with email ${user.email} already in use.`);
 
         const userToCreate = user;
 
         userToCreate.password = bcrypt.hashSync(user.password, Config.auth.bcryptRounds);
 
-        if (!duplicate) result = await UserRecordManager.addUser(userToCreate);
-        else
-            throw new Error(`User provided with email ${user.email} already in use.`);
+        const result: IUser = await UserRecordManager.addUser(userToCreate);
 
         return result;
     }
