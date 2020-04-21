@@ -3,9 +3,7 @@ import { Request, Response } from 'express';
 import DevicesManager from '../service/DevicesManager';
 
 import IDevice from '../domain/IDevice';
-import DefaultVariables from "../domain/DefaultVariables";
 import IDeviceVariable from '../domain/IDeviceVariable';
-import Device from '../persistence/Device';
 
 export default class DevicesController {
     static async addDevice(req: Request, res: Response): Promise<void> {
@@ -24,7 +22,12 @@ export default class DevicesController {
     static async addVariable(req: Request, res: Response): Promise<void> {
         try {
             const deviceId = req.params['id'];
-            const variable: IDeviceVariable = { idSensor: Number(req.body['idSensor']), type: req.body['type'] }
+            const variable: IDeviceVariable = {
+                name: req.body['name'],
+                description: req.body['description'],
+                idSensor: Number(req.body['idSensor']),
+                type: req.body['type']
+            };
 
             const updatedDevice: IDevice | null = await DevicesManager.addVariable(deviceId, variable);
             if (updatedDevice) res.status(200).send({ device: updatedDevice });
@@ -52,7 +55,9 @@ export default class DevicesController {
         // But not right now.
 
         try {
-            const devices = await DevicesManager.getDevices();
+            const adminId = req.authInfo.id;
+            console.log('AdminId: ', adminId);
+            const devices = await DevicesManager.getDevices(adminId);
             console.log('Devices: ', devices);
 
             if (devices) res.status(200).send({ devices: { length: devices.length, devices } });
