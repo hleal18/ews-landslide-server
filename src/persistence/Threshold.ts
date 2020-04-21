@@ -14,6 +14,12 @@ const ThresholdSchema = new mongoose.Schema({
     },
     lowerBound: Number,
     upperBound: Number
+}, {
+    toObject: {
+        transform(doc, ret) {
+            ret._id = String(doc._id);
+        }
+    }
 });
 
 export interface ThresholdDocument extends mongoose.Document, IThreshold { }
