@@ -12,6 +12,11 @@ export default class CriticalSpotsRecordManager {
         return result;
     }
 
+    static async getCriticalSpots(riskZonesIds: Array<ICriticalSpot>): Promise<Array<ICriticalSpot> | null> {
+        const result: Array<ICriticalSpot> | null = await CriticalSpots.find({ $or: riskZonesIds });
+        return result;
+    }
+
     static async editCriticalSpot(criticalSpotId: string, criticalSpot: ICriticalSpot): Promise<ICriticalSpot | null> {
         const newCriticalSpot: ICriticalSpot | null = await CriticalSpots.findByIdAndUpdate(criticalSpotId, criticalSpot, { new: true });
         return newCriticalSpot;

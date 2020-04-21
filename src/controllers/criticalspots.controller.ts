@@ -48,4 +48,17 @@ export default class CriticalSpotsController {
             res.status(404).send({ message: `There was an error ${e.message}` });
         }
     }
+
+    static async getCriticalSpots(req: Request, res: Response): Promise<void> {
+        try {
+            const adminId = req.authInfo.id;
+            const criticalSpots: [ICriticalSpot] | null = await CriticalSpotsManager.getCriticalSpots(adminId);
+
+            if (criticalSpots) res.status(200).send({ criticalSpots });
+            else res.status(404).send({ message: `Error occured: no critical spot was found` })
+        } catch (e) {
+            console.log(`Error: ${e.message}`);
+            res.status(404).send({ message: `There was an error ${e.message}` });
+        }
+    }
 }
