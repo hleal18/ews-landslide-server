@@ -2,7 +2,7 @@ import mqtt from "mqtt";
 
 const topics = "hola";
 
-const mqttClient = mqtt.connect('ws://test.mosquitto.org', { port: 8080 });
+const mqttClient = mqtt.connect('mqtt://semard.com.co', { port: 1883});
 
 console.log('Connecting...............');
 
