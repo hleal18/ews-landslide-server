@@ -1,16 +1,11 @@
 import mongoose, { Schema } from "mongoose";
 import IDevice from "../domain/IDevice";
+import VariableInfoSchema from "./VariableInfoSchema";
 
 const DeviceSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-        unique: true,
-        required: true
-    },
     name: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     description: {
         type: String,
@@ -21,21 +16,7 @@ const DeviceSchema = new mongoose.Schema({
         required: true,
         ref: 'CriticalSpots'
     },
-    variables: {
-        type: [
-            {
-                idSensor: {
-                    type: Number,
-                    required: true
-                },
-                type: {
-                    type: String,
-                    required: true
-                }
-            }
-        ],
-        required: true
-    },
+    variables: { type: [{ type: VariableInfoSchema, required: true }], default: [] }
 });
 
 export interface DeviceDocument extends IDevice, mongoose.Document { }
