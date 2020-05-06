@@ -6,12 +6,14 @@ import IThreshold from "../domain/IThreshold";
 export default class ThresholdsManager {
     static async add(threshold: IThreshold): Promise<IThreshold> {
         const user = await UserManager.getUserById(threshold.adminId);
-        const repeatedThreshold = await this.get(threshold.variableId, threshold.adminId);
+        const repeatedThreshold = await this.getByVariableAndAdminIds(threshold.variableId, threshold.adminId);
         const devices = await DevicesManager.getDevices(threshold.adminId);
 
         if (!user) throw new Error(`Invalid user with id: ${threshold.adminId}.`);
         else if (repeatedThreshold) throw new Error(`Variable with id: ${threshold.variableId} already has a threshold.`);
         else if (!devices) throw new Error(`User with id: ${threshold.adminId} does not have devices`);
+
+        console.log(`Threshold: `, threshold);
 
         // variables.id is a method provided by default from mongoose array types.
         const variable = devices.find(device => !!device.variables.id(threshold.variableId));
@@ -39,6 +41,10 @@ export default class ThresholdsManager {
 
     static async get(thresholdId: String, adminId: String): Promise<IThreshold | null> {
         return await ThresholdRecordManager.get(thresholdId, adminId);
+    }
+
+    static async getByVariableAndAdminIds(variableId: String, adminId: String): Promise<IThreshold | null> {
+        return await ThresholdRecordManager.getByVariableAndAdminIds(variableId, adminId);
     }
 
     static async getThresholds(adminId: String): Promise<IThreshold[] | null> {

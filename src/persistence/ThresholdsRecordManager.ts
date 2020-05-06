@@ -35,4 +35,8 @@ export default class ThresholdsRecordManager {
     static async getThresholds(adminId: String): Promise<IThreshold[] | null> {
         return await Threshold.find({ adminId });
     }
+
+    static async getByVariableAndAdminIds(variableId: String, adminId: String): Promise<IThreshold | null> {
+        return await Threshold.findOne({ variableId, adminId });
+    }
 }
