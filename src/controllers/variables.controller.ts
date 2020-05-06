@@ -18,7 +18,7 @@ export default class VariablesController {
 
             const query: IQuery = { limit, offset, start, end };
 
-            console.log('Query received: ', query);
+            // console.log('Query received: ', query);
             const variables: Array<IVariable<T>> = await VariablesManager.getVariables(deviceId, idSensor, type, query);
 
             //console.log('Variables: ', variables);

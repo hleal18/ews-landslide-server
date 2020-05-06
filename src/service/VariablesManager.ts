@@ -16,8 +16,8 @@ export default class VariablesManager {
         start = new Date(0),
         end = new Date(Date.now())
     }: IQuery = {}): Promise<Array<IVariable<T>>> {
-        console.log('devices');
-        console.log('Received things: ');
+        // console.log('devices');
+        // console.log('Received things: ');
         console.log(limit, offset, start, end);
         const variables: Array<IVariable<T>> = await VariablesRecordManager.getVariables(deviceId, idSensor, type, { limit, offset, start, end });
         return variables;
