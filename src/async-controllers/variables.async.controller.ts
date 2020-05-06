@@ -16,7 +16,10 @@ class VariablesAsyncController {
 
             variable.timestamp = new Date(Date.now());
 
-            // Comprobar deviceId existe
+            // Get user to assign the current reading.
+            // Check deviceId exists for the appropriate user.
+            // DeviceId is in fact name of device on mongodb devices model.
+
             const device: IDevice | null = await DevicesManager.getDevice(variable.deviceId);
 
             if (device === null)

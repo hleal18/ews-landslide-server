@@ -9,8 +9,8 @@ export default class DevicesRecordManager {
         return result;
     }
 
-    static async getDevice(id: String): Promise<IDevice | null> {
-        const result: IDevice | null = await Devices.findById(id);
+    static async getDevice(name: String): Promise<IDevice | null> {
+        const result: IDevice | null = await Devices.findOne({ name });
         return result;
     }
 

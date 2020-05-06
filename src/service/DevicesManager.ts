@@ -10,8 +10,8 @@ export default class DevicesManager {
         return result;
     }
 
-    static async getDevice(deviceId: String): Promise<IDevice | null> {
-        const result = await DevicesRecordManager.getDevice(deviceId);
+    static async getDevice(deviceName: String): Promise<IDevice | null> {
+        const result = await DevicesRecordManager.getDevice(deviceName);
         return result;
     }
 
