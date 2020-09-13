@@ -41,7 +41,7 @@ export default class DevicesController {
     static async getDevice(req: Request, res: Response): Promise<void> {
         try {
             const deviceId = req.params['id'];
-            const device: IDevice | null = await DevicesManager.getDevice(deviceId);
+            const device: IDevice | null = await DevicesManager.getDeviceById(deviceId);
             if (device) res.status(200).send({ device });
             else res.status(404).send({ message: `Error occurred: deviceId entry not found for ${deviceId} id` });
         } catch (e) {
