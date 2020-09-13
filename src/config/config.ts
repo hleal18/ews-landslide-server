@@ -11,6 +11,10 @@ interface Config {
         jwt_secret: string,
         jwt_algorithm: string,
         jwt_expiration: number
+    },
+    mailgun: {
+        domain: string,
+        apiKey: string
     }
 }
 
@@ -23,7 +27,13 @@ const config: Config = {
         jwt_algorithm: process.env["JWT_ALGORITHM"] || "HS256",
         jwt_secret: process.env["JWT_SECRET"] || "",
         jwt_expiration: Number(process.env["JWT_EXPIRATION"])
+    },
+    mailgun: {
+        domain: process.env["MAILGUN_DOMAIN"] || "",
+        apiKey: process.env["MAILGUN_API_KEY"] || ""
     }
 };
+
+
 
 export default config;
