@@ -36,7 +36,9 @@ export default class AlertsManager {
       const currentDate = moment(new Date());
       const difference = currentDate.diff(mostRecentAlertDate, "minutes");
 
-      if (Math.abs(difference) > 30 && mostRecentAlertSent.alertTriggerer !== alertTriggerer) cooldownPassed = true;
+      console.log('difference: ', difference);
+
+      if (Math.abs(difference) > 30 && mostRecentAlertSent.alertTriggerer === alertTriggerer) cooldownPassed = true;
     }
 
     if (!cooldownPassed)
