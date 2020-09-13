@@ -14,6 +14,10 @@ export default class DevicesRecordManager {
         return result;
     }
 
+    static async getDeviceById(deviceId: String) {
+        return await Devices.findById(deviceId);
+    }
+
     // In order to get all the devices, it is required to know all criticalSpotsIds.
     // Useful to be able to know which devices belong to a specific user,
     // based on the criticalSpots linked with it.

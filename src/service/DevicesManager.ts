@@ -15,6 +15,10 @@ export default class DevicesManager {
         return result;
     }
 
+    static async getDeviceById(deviceId: String) {
+        return await DevicesRecordManager.getDeviceById(deviceId);
+    }
+
     static async getDevices(adminId: String): Promise<Array<IDevice> | null> {
         let result = null;
         // 1. Find all the riskZones linked with provided adminId.
