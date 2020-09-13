@@ -32,4 +32,22 @@ export default class VariablesController {
             res.status(404).send({ message: `There was an error ${e.message}` });
         }
     }
+
+    static async getVariablesInExcelSheetFormat<T>(req: Request, res: Response): Promise<void> {
+        try {
+            const deviceId = req.params['id'];
+            const idSensor = Number(req.params['idSensor']);
+
+            const variablesWithExcelFormat = await VariablesManager.getVariablesInExcelSheetFormat(deviceId, idSensor);
+
+            res.status(200).send({
+                variables_records: {
+                    length: variablesWithExcelFormat.length,
+                    variables: variablesWithExcelFormat
+                }
+            });
+        } catch (e) {
+            res.status(404).send({ message: `There was an error ${e.message}` });
+        }
+    }
 }
