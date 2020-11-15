@@ -36,8 +36,6 @@ export default class AlertsManager {
       const currentDate = moment(new Date());
       const difference = currentDate.diff(mostRecentAlertDate, "minutes");
 
-      console.log('difference: ', difference);
-
       if (Math.abs(difference) > 30 && mostRecentAlertSent.alertTriggerer === alertTriggerer) cooldownPassed = true;
     }
 
@@ -105,7 +103,7 @@ export default class AlertsManager {
     if (alertTriggerer === "upperBound") {
       subject = `${defaultVariablesTranslated[variableType]} por encima de umbral ${alertTriggererValue}`;
     } else if (alertTriggerer === "lowerBound") {
-      subject = `${variableType} por debajo de umbral ${alertTriggererValue}`;
+      subject = `${defaultVariablesTranslated[variableType]} por debajo de umbral ${alertTriggererValue}`;
     }
 
     let body = `Se registro un valor de <b>${variableValue}</b> para variable de tipo <b>${defaultVariablesTranslated[variableType]}</b> a las ${timestamp.toLocaleTimeString()} <br/>`;
@@ -118,8 +116,6 @@ export default class AlertsManager {
     };
 
     console.log("Sending message");
-
-    console.log("Message body: ", body);
 
     try {
       await mailer.send(message.to, message.subject, message.body);
