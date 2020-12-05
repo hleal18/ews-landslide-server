@@ -12,18 +12,18 @@ export default class AlertsregistryRecordManager {
  
   // TODO: ensure most recent results first based on timestamp
   static async getAlertsByAdminId(adminId: string) {
-    return await AlertsRegistry.find({ adminId }).sort({ create_at: -1 });
+    return await AlertsRegistry.find({ adminId }).sort({ timestamp: -1 });
   }
 
   static async getAlertsByVariableAndAdminId(variableId: string, adminId: string) {
-    return await AlertsRegistry.find({ adminId, variableId }).sort({ created_at: -1 });
+    return await AlertsRegistry.find({ adminId, variableId }).sort({ timestamp: -1 });
   }
 
   static async getMoreRecentAlertRegistryByVariableAdminIdAndAlertTriggerer(variableId: string, adminId: string, alertTriggerer: AlertTriggerers) {
-    return await AlertsRegistry.findOne({ adminId, variableId, alertTriggerer }).sort({ created_at: -1 });
+    return await AlertsRegistry.findOne({ adminId, variableId, alertTriggerer }).sort({ timestamp: -1 });
   }
 
   static async getMoreRecentAlertRegistryByVariableAndAdminIds(variableId: string, adminId: string) {
-    return await AlertsRegistry.findOne({ variableId, adminId }).sort({ created_at: -1 }); 
+    return await AlertsRegistry.findOne({ variableId, adminId }).sort({ timestamp: -1 }); 
   }
 }
