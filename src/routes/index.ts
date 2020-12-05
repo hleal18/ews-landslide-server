@@ -5,6 +5,7 @@ import DevicesRoutes from "./devices.routes";
 import VariablesRoutes from "./variables.routes";
 import ThresholdsRoutes from "./thresholds.routes";
 import UsersRoutes from "./users.routes";
+import AlertsRoutes from "./alerts.routes";
 
 const appRouter = Router();
 
@@ -14,5 +15,6 @@ appRouter.use('/devices', DevicesRoutes);
 appRouter.use('/variables', VariablesRoutes);
 appRouter.use('/thresholds', ThresholdsRoutes);
 appRouter.use('/users', UsersRoutes);
+appRouter.use('/alerts', AlertsRoutes);
 
 export default appRouter;
