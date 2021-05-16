@@ -7,7 +7,7 @@ import AlertsRegistryRecordManager from "./AlertsRegistryManager";
 import RiskZonesManager from "./RiskZonesManager";
 import DevicesManager from "./DevicesManager";
 import UsersManager from "./UsersManager";
-import { defaultVariablesTranslated } from "../domain/DefaultVariables";
+import DefaultVariables, { defaultVariablesTranslated } from "../domain/DefaultVariables";
 
 export default class AlertsManager {
   static async notifyAdmin(
@@ -48,13 +48,16 @@ export default class AlertsManager {
 
     if (user === null) return;
 
+    const emailsToNotify: string[] = [...(user.emailsToNotify ?? [user.email]) as string[]];
+
+    console.log('Emails to notify: ', emailsToNotify);
     const alertRegistry: IAlertRegistry = {
       adminId,
       variableId,
       deviceId,
       alertTriggerer,
       alertTriggererValue,
-      notified: user.email as string,
+      notified: emailsToNotify,
       timestamp: new Date(Date.now()),
       value,
     };
@@ -73,17 +76,20 @@ export default class AlertsManager {
     if (!riskZone)
       throw new Error("Riskzone not found while creating alert registry");
 
-    await this.sendAlert(
-      user.email as string,
-      riskZone.name,
-      device.name,
-      variable.name as string,
-      value,
-      variable.type,
-      alertTriggerer,
-      alertTriggererValue,
-      timestamp
-    );
+    for (const email of emailsToNotify) {
+      console.log("Sending email to: ", email);
+      await this.sendAlert(
+        email,
+        riskZone.name,
+        device.name,
+        variable.name as string,
+        value,
+        variable.type,
+        alertTriggerer,
+        alertTriggererValue,
+        timestamp
+      );
+    }
     await AlertsRegistryRecordManager.addAlertRegistry(alertRegistry);
   }
 
@@ -101,12 +107,12 @@ export default class AlertsManager {
     let subject = "";
 
     if (alertTriggerer === "upperBound") {
-      subject = `${defaultVariablesTranslated[variableType]} por encima de umbral ${alertTriggererValue}`;
+      subject = `${defaultVariablesTranslated[variableType as DefaultVariables]} por encima de umbral ${alertTriggererValue}`;
     } else if (alertTriggerer === "lowerBound") {
-      subject = `${defaultVariablesTranslated[variableType]} por debajo de umbral ${alertTriggererValue}`;
+      subject = `${defaultVariablesTranslated[variableType as DefaultVariables]} por debajo de umbral ${alertTriggererValue}`;
     }
 
-    let body = `Se registro un valor de <b>${variableValue}</b> para variable de tipo <b>${defaultVariablesTranslated[variableType]}</b> a las ${timestamp.toLocaleTimeString()} <br/>`;
+    let body = `Se registro un valor de <b>${variableValue}</b> para variable de tipo <b>${defaultVariablesTranslated[variableType]}</b> a las ${timestamp.toLocaleTimeString('co-CO')} <br/>`;
     body += `Alerta emitida para variable <b>${variableName}</b> en nodo sensor <b>${deviceName}</b>, instalado en zona de riesgo <b>${riskZoneName}</b>`;
 
     const message: IMessageBody = {

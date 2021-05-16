@@ -31,7 +31,7 @@ const AlertSchema = new mongoose.Schema({
     required: true
   },
   notified: {
-    type: String,
+    type: [String],
     required: true
   }
 });

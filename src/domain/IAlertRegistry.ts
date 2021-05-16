@@ -8,5 +8,5 @@ export default interface AlertRegistry {
   alertTriggerer: AlertTriggerers;
   alertTriggererValue: Number;
   timestamp: Date;
-  notified: string;
+  notified: string[];
 }

@@ -3,6 +3,7 @@ interface IUser {
     lastName: String;
     email: String;
     password: String;
+    emailsToNotify?: String[];
 }
 
 export default IUser;

@@ -11,7 +11,7 @@ export default class UsersManager {
 
         if (duplicate) throw new Error(`User provided with email ${user.email} already in use.`);
 
-        const userToCreate = user;
+        const userToCreate: IUser = {...user, emailsToNotify: [user.email] };
 
         userToCreate.password = bcrypt.hashSync(user.password, Config.auth.bcryptRounds);
 
