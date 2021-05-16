@@ -7,7 +7,7 @@ export default class ThresholdsController {
         try {
             const threshold: IThreshold = {
                 ...req.body,
-                adminId: req.authInfo.id;
+                adminId: req.authInfo.id,
             }
 
             const result = await ThresholdsManager.add(threshold);
