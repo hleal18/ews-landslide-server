@@ -2,7 +2,6 @@
 
 import IVariable from "../domain/IVariable";
 import IDevice from "../domain/IDevice";
-import IAlert, { AlertTriggerers } from "../domain/IAlertRegistry";
 import AlertManager from "../service/AlertsManager";
 import VariablesManager from "../service/VariablesManager";
 import DevicesManager from "../service/DevicesManager";
