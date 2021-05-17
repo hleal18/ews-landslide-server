@@ -59,8 +59,21 @@ async function getUser(req: Request, res: Response) {
     }
 }
 
+async function modifyUser(req: Request, res: Response) {
+    const userId = req.authInfo.id;
+    try {
+        const updates: Partial<IUser> = req.body;
+        const updatedUser = await UsersManager.modifyUserById(userId, updates);
+
+        if (!updatedUser) return res.status(404).send({ message: `User not found` });
+    } catch(e) {
+        return res.status(404).send({ message: `There was an error ${e.message}` });
+    }
+}
+
 export default {
-    addUser: addUser,
-    login: login,
-    getUser
+    addUser,
+    login,
+    getUser,
+    modifyUser,
 }

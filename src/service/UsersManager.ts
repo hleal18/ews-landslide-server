@@ -29,4 +29,20 @@ export default class UsersManager {
         const result: IUser | null = await UserRecordManager.getUserById(id);
         return result;
     }
+
+    static async modifyUserById(id: String, update: Partial<IUser>): Promise<IUser | null> {
+        const originalUser = await UsersManager.getUserById(id);
+        if (originalUser) {
+            const updateOriginalEmail = update.email ? update.email !== originalUser.email : false;
+            if (updateOriginalEmail) throw new Error(`Email no puede ser modificado`);
+            const arrayContainsOriginalEmail = !!update.emailsToNotify?.includes(originalUser.email);
+            if (!arrayContainsOriginalEmail && update.emailsToNotify) {
+                console.log('Adding original user to the emails to notify array');
+                update.emailsToNotify?.push(originalUser.email);
+            }
+            return UserRecordManager.modifyUserById(id, update);
+        }
+        
+        return null;
+    }
 }

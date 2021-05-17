@@ -8,5 +8,6 @@ const router = Router();
 router.post('/', UsersController.addUser);
 router.post('/login', UsersController.login);
 router.get('/', passport.authenticate('jwt', { session: false }), UsersController.getUser);
+router.patch('/', passport.authenticate('jwt', { session: false }), UsersController.modifyUser);
 
 export default router;
