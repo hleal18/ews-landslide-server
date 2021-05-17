@@ -34,9 +34,11 @@ class VariablesAsyncController {
                 value.idSensor === variable.idSensor && value.type === variable.type) === undefined)
                 throw new Error(`Device with name ${device.name} does not contain variables with idsensor: ${variable.idSensor} and type: ${variable.type}`);
 
-            await VariablesManager.addVariable(variable);
+            const dbVariable = device.variables.find((value) => value.idSensor === variable.idSensor); 
+            const variableId = dbVariable?._id;
 
-            const variableId = device.variables.find((value) => value.idSensor === variable.idSensor)?._id;
+            variable.name = dbVariable!.name as string;
+            await VariablesManager.addVariable(variable);
 
             console.log("Mongo ID associated with variable: ", variableId);
 

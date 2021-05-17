@@ -18,7 +18,7 @@ export default class UsersRecordManager {
     }
 
     static async modifyUserById(id: String, update: Partial<IUser>): Promise<IUser | null> {
-        const result: IUser | null = await Users.findOneAndUpdate({ _id: id }, update, { new: true });
+        const result: IUser | null = await Users.findOneAndUpdate({ _id: id }, update, { new: true, useFindAndModify: false });
         return result;
     }
 }

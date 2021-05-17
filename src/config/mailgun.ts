@@ -3,7 +3,7 @@ import config from "./config";
 
 const mailer = new NodeMailgun(config.mailgun.apiKey, config.mailgun.domain);
 
-mailer.fromEmail = "alertas-sat@email.hleal.email";
+mailer.fromEmail = "alertas-sat@sat-email.hleal.me";
 mailer.fromTitle = "SAT Alertas";
 mailer.unsubscribeLink = false;
 

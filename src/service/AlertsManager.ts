@@ -48,7 +48,10 @@ export default class AlertsManager {
 
     if (user === null) return;
 
-    const emailsToNotify: string[] = [...(user.emailsToNotify ?? [user.email]) as string[]];
+    const emailsToNotify: string[] = [...(user.emailsToNotify ?? []) as string[]];
+
+    if (!emailsToNotify.includes(user.email as string)) emailsToNotify.push(user.email as string);
+    console.log('Emails to notify after validation: ');
 
     console.log('Emails to notify: ', emailsToNotify);
     const alertRegistry: IAlertRegistry = {
@@ -76,25 +79,22 @@ export default class AlertsManager {
     if (!riskZone)
       throw new Error("Riskzone not found while creating alert registry");
 
-    for (const email of emailsToNotify) {
-      console.log("Sending email to: ", email);
-      await this.sendAlert(
-        email,
-        riskZone.name,
-        device.name,
-        variable.name as string,
-        value,
-        variable.type,
-        alertTriggerer,
-        alertTriggererValue,
-        timestamp
-      );
-    }
+    await this.sendAlert(
+      emailsToNotify,
+      riskZone.name,
+      device.name,
+      variable.name as string,
+      value,
+      variable.type,
+      alertTriggerer,
+      alertTriggererValue,
+      timestamp
+    );
     await AlertsRegistryRecordManager.addAlertRegistry(alertRegistry);
   }
 
   private static async sendAlert(
-    email: string,
+    emails: string[],
     riskZoneName: string,
     deviceName: string,
     variableName: string,
@@ -116,7 +116,7 @@ export default class AlertsManager {
     body += `Alerta emitida para variable <b>${variableName}</b> en nodo sensor <b>${deviceName}</b>, instalado en zona de riesgo <b>${riskZoneName}</b>`;
 
     const message: IMessageBody = {
-      to: email,
+      to: emails,
       subject,
       body,
     };
@@ -133,7 +133,7 @@ export default class AlertsManager {
 }
 
 interface IMessageBody {
-  to: string;
+  to: string[];
   subject: string;
   body: string;
 }

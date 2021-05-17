@@ -66,8 +66,9 @@ async function modifyUser(req: Request, res: Response) {
         const updatedUser = await UsersManager.modifyUserById(userId, updates);
 
         if (!updatedUser) return res.status(404).send({ message: `User not found` });
+        return res.status(200).send({ user: updatedUser });
     } catch(e) {
-        return res.status(404).send({ message: `There was an error ${e.message}` });
+        return res.status(404).send({ message: `Se encontro un error ${e.message}` });
     }
 }
 

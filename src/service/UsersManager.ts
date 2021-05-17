@@ -11,7 +11,7 @@ export default class UsersManager {
 
         if (duplicate) throw new Error(`User provided with email ${user.email} already in use.`);
 
-        const userToCreate: IUser = {...user, emailsToNotify: [user.email] };
+        const userToCreate: IUser = { ...user };
 
         userToCreate.password = bcrypt.hashSync(user.password, Config.auth.bcryptRounds);
 
@@ -35,11 +35,6 @@ export default class UsersManager {
         if (originalUser) {
             const updateOriginalEmail = update.email ? update.email !== originalUser.email : false;
             if (updateOriginalEmail) throw new Error(`Email no puede ser modificado`);
-            const arrayContainsOriginalEmail = !!update.emailsToNotify?.includes(originalUser.email);
-            if (!arrayContainsOriginalEmail && update.emailsToNotify) {
-                console.log('Adding original user to the emails to notify array');
-                update.emailsToNotify?.push(originalUser.email);
-            }
             return UserRecordManager.modifyUserById(id, update);
         }
         
