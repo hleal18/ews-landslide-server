@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
     res.send("Hellow world!");
 });
 
-app.listen(3002, function () {
-    console.log('Example app listening on port 3001');
+const serverPort = 3002;
+app.listen(serverPort, function () {
+    console.log(`Example app listening on port ${serverPort}`);
 });
