@@ -33,8 +33,8 @@ export default class UsersManager {
     static async modifyUserById(id: String, update: Partial<IUser>): Promise<IUser | null> {
         const originalUser = await UsersManager.getUserById(id);
         if (originalUser) {
-            const updateOriginalEmail = update.email ? update.email !== originalUser.email : false;
-            if (updateOriginalEmail) throw new Error(`Email no puede ser modificado`);
+            // const updateOriginalEmail = update.email ? update.email !== originalUser.email : false;
+            // if (updateOriginalEmail) throw new Error(`Email no puede ser modificado`);
             return UserRecordManager.modifyUserById(id, update);
         }
         
