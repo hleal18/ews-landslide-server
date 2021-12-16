@@ -88,4 +88,25 @@ export default class RiskZonesControllers {
             res.status(404).send({ message: 'Document was not edited, an unexpected error occurred' });
         }
     }
+
+    static async updateNotificationsSettings(req: Request, res: Response): Promise<void> {
+        try {
+            const zoneId = req.params['id'];
+            const notificationsEnabled = req.body?.notificationsEnabled ?? false;
+            const riskZone = await RiskZonesManager.updateNotificationsSettings(
+              zoneId,
+              notificationsEnabled
+            );
+            if (riskZone) {
+                res.status(200).send({ riskZone });
+            }
+            else {
+                res.status(404).send({ message: 'Document was not edited, review the request.' });
+            }
+        } catch (e) {
+            console.log('An error occured: ', e);
+            console.log('An error occured: ', e.message);
+            res.status(404).send({ message: 'Document was not edited, an unexpected error occurred' });
+        }
+    }
 }

@@ -22,4 +22,13 @@ export default class RiskZonesManager {
         const riskZone: IRiskZone | null = await RiskZonesRecordManager.editRiskZone(id_zone, zone);
         return riskZone
     }
+
+    static async updateNotificationsSettings(id_zone: string, notificationsEnabled: boolean): Promise<IRiskZone | null> {
+        const riskZone: IRiskZone | null =
+          await RiskZonesRecordManager.updateNotificationsSettings(
+            id_zone,
+            notificationsEnabled
+          );
+        return riskZone;
+    }
 }

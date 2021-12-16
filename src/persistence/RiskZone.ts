@@ -13,6 +13,9 @@ const RiskZoneSchema = new mongoose.Schema({
         type: String,
         required: true,
         immutable: true
+    },
+    notificationsEnabled: {
+        type: Boolean,
     }
 });
 

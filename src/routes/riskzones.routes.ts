@@ -8,5 +8,6 @@ router.post('/', passport.authenticate('jwt', { session: false }), RiskZonesCont
 router.get('/', passport.authenticate('jwt', { session: false }), RiskZonesControllers.getRiskZones)
 router.get('/:id', passport.authenticate('jwt', { session: false }), RiskZonesControllers.getRiskZone);
 router.patch('/:id', passport.authenticate('jwt', { session: false }), RiskZonesControllers.editRiskZone);
+router.put('/:id/notifications_settings', passport.authenticate('jwt', { session: false }), RiskZonesControllers.updateNotificationsSettings);
 
 export default router;
