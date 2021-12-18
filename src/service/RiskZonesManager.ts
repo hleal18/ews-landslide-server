@@ -4,7 +4,10 @@ import IRiskZone from "../domain/IRiskZone";
 export default class RiskZonesManager {
 
     static async addRiskZone(zone: IRiskZone): Promise<IRiskZone> {
-        const riskZone: IRiskZone = await RiskZonesRecordManager.addRiskZone(zone);
+        const riskZone: IRiskZone = await RiskZonesRecordManager.addRiskZone({
+          ...zone,
+          notificationsEnabled: true,
+        });
         return riskZone;
     }
 
