@@ -60,7 +60,7 @@ class VariablesAsyncController {
 
             const { lowerBound, upperBound } = associatedThreshold;
             
-            if (lowerBound && variable.value < lowerBound) {
+            if (lowerBound && variable.value < lowerBound && associatedRiskZone.notificationsEnabled) {
                 await AlertManager.notifyAdmin(
                   associatedRiskZone.adminId,
                   variableId,
@@ -71,7 +71,7 @@ class VariablesAsyncController {
                    variable.value,
                    variable.timestamp
                 );
-            } else if (upperBound && variable.value > upperBound) {
+            } else if (upperBound && variable.value > upperBound && associatedRiskZone.notificationsEnabled) {
                 await AlertManager.notifyAdmin(
                     associatedRiskZone.adminId,
                     variableId,
@@ -82,8 +82,11 @@ class VariablesAsyncController {
                     variable.value,
                     variable.timestamp
                 );
-            }
-            else {
+            } else if (!associatedRiskZone.notificationsEnabled) {
+                console.log(
+                  `Variable with id ${variableId} for deviceId ${device.name} doesn't have notifications enabled for associated riskzone ${associatedRiskZone.name}`
+                );
+            } else {
                 console.log(`Variable with id ${variableId} for deviceId ${device.name} is in an acceptable range`);
             }
         } catch (e) {
