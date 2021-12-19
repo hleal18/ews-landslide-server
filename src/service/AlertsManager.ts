@@ -112,7 +112,8 @@ export default class AlertsManager {
       subject = `${defaultVariablesTranslated[variableType as DefaultVariables]} por debajo de umbral ${alertTriggererValue}`;
     }
 
-    let body = `Se registro un valor de <b>${variableValue}</b> para variable de tipo <b>${defaultVariablesTranslated[variableType]}</b> a las ${timestamp.toLocaleTimeString('co-CO')} <br/>`;
+    const transformedTimestamp = moment(timestamp).subtract(6, 'hours').format('DD/MM/YYYY, h:mm:ss A');
+    let body = `Se registro un valor de <b>${variableValue}</b> para variable de tipo <b>${defaultVariablesTranslated[variableType]}</b> a las ${transformedTimestamp} <br/>`;
     body += `Alerta emitida para variable <b>${variableName}</b> en nodo sensor <b>${deviceName}</b>, instalado en zona de riesgo <b>${riskZoneName}</b>`;
 
     const message: IMessageBody = {
